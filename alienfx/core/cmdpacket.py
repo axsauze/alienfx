@@ -230,6 +230,8 @@ class AlienFXCmdPacket(object):
     def pkt_to_string(self, pkt_bytes, controller):
         """ Return a human readable string representation of a command packet.
         """
+        print("In pkt_to_string")
+        print("converting packet to string", pkt_bytes, len(pkt_bytes), self.PACKET_LENGTH)
         if (len(pkt_bytes) != self.PACKET_LENGTH):
             return "BAD PACKET: {}".format(pkt_bytes)
         else:

@@ -89,7 +89,9 @@ class Zonescanner:
             myctr._driver.acquire()
             myctr._ping()
             myctr._reset('all-lights-off')
-            myctr._wait_controller_ready()
+            if myctr._wait_controller_ready():
+                raise "failed"
+            print("ready")
 
             # Make commands
             cmds = []
@@ -114,7 +116,7 @@ class Zonescanner:
             cmds = []
             cmds.append(myctr.cmd_packet.make_cmd_set_blink_colour(1, zone, [0xF, 0xF, 0xF]))
             cmds.append(myctr.cmd_packet.make_cmd_loop_block_end())  # loop
-            cmds.append([2, 3, 2, 255, 130, 16, 0, 0, 0, 0])  # Don't know exactly what this does... 2,3,2 setting color for second sequence or something like that...
+            cmds.append([2, 3, 2, 255, 130, 16, 0, 0, 0, 0, 0, 0, 0])  # Don't know exactly what this does... 2,3,2 setting color for second sequence or something like that...
             cmds.append(myctr.cmd_packet.make_cmd_loop_block_end())  # loop
             myctr._send_cmds(cmds)
 
@@ -122,20 +124,20 @@ class Zonescanner:
             cmds = []
             cmds.append(myctr.cmd_packet.make_cmd_transmit_execute())  # Execute...
             myctr._send_cmds(cmds)
+            print("At end of scanzone()")
 
         except:
             logging.error("Error while testing current zone...")
 
         finally:
             myctr._driver.release()
-        if self.askuser("Is anything blinking now?"):
-            # User saw something blinking
-            return True
+
         return False
 
     def scan(self):
         print("Welcome. This will help you to scan for alienfx-controllers and their lightning zones.")
         afxcontroldevs=AlienFXProber.find_controllers(self.vendorid)  # Get a list of all usb-devices with the given vendor-id
+        print("controllers found: ", afxcontroldevs)
         for controller in afxcontroldevs:
             # Perform zone scanning for each controller found...
             zone = 1  # initial zone from which we start iterating
@@ -151,7 +153,7 @@ class Zonescanner:
                     # Ask user for a name, store name and zonecode
                     zonename = self.askzonename()
                     self.zonesfound[zonename] = zone  # Store name an zone code in Dictionary
-                zone = zone*2
+                zone = zone+1
 
             print("These are your zonecodes for current controller (\""+vendorstring + " / " + devicestring + "\"):")
             for z in self.zonesfound.items():

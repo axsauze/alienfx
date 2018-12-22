@@ -60,6 +60,8 @@ def start():
     controller = AlienFXProber.get_controller()  # DEBUG: you may comment this out for development of zonescanner
     # controller = None  # DEBUG: you may uncomment this out for development of zonescanner
 
+    alienfx_logger.set_logfile("~/alien-debug.log")
+
     if controller is None:
         logging.error("No Alien FX controller, defined by a supported model, found!")
         logging.info("Asking user for zone probing...")

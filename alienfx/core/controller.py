@@ -33,6 +33,8 @@ AlienFXController: base class for AlienFX controller chips
 from builtins import hex
 from builtins import object
 import logging
+import time
+
 
 import alienfx.core.usbdriver as alienfx_usbdriver
 import alienfx.core.cmdpacket as alienfx_cmdpacket
@@ -154,9 +156,11 @@ class AlienFXController(object):
         """
         ready = False
         errcount=0
+        total=1
         while not ready:
             pkt = self.cmd_packet.make_cmd_get_status()
-            logging.debug("SENDING: {}".format(self.pkt_to_string(pkt)))
+            pkt_str = self.pkt_to_string(pkt)
+            logging.debug("SENDING: {}".format(pkt_str))
             self._driver.write_packet(pkt)
             try:
                 resp = self._driver.read_packet()
@@ -167,6 +171,11 @@ class AlienFXController(object):
             if errcount > 50:
                 logging.error("Controller status could not be retrieved. Is the device already in use?")
                 quit(-99)
+
+            time.sleep(2)
+            total += 1
+            if total > 10:
+                return True
         
     def pkt_to_string(self, pkt_bytes):
         """ Return a human readable string representation of an AlienFX

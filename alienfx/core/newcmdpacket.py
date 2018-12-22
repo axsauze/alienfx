@@ -279,7 +279,7 @@ class NewAlienFXCmdPacket(object):
         """ Return a command packet for the "set morph colour" command with the
         given parameters.
         """
-        pkt = [0x02, cls.CMD_SET_MORPH_COLOUR, 0, 0, 0, 0, 0, 0, 0]
+        pkt = [0x02, cls.CMD_SET_MORPH_COLOUR, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         pkt[2] = block & 0xff
         pkt[3:6] = [(zone&0xff0000) >> 16, (zone&0xff00) >> 8, zone & 0xff]
         pkt[6:9] = cls._pack_colour_pair(colour1, colour2)
@@ -290,7 +290,7 @@ class NewAlienFXCmdPacket(object):
         """ Return a command packet for the "set blink colour" command with the
         given parameters.
         """
-        pkt = [0x02, cls.CMD_SET_BLINK_COLOUR, 0, 0, 0, 0, 0, 0, 0]
+        pkt = [0x02, cls.CMD_SET_BLINK_COLOUR, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         pkt[2] = block & 0xff
         pkt[3:6] = [(zone&0xff0000) >> 16, (zone&0xff00) >> 8, zone & 0xff]
         pkt[6:8] = cls._pack_colour(colour)
@@ -301,7 +301,7 @@ class NewAlienFXCmdPacket(object):
         """ Return a command packet for the "set colour" command with the
         given parameters.
         """
-        pkt = [0x02, cls.CMD_SET_COLOUR, 0, 0, 0, 0, 0, 0, 0]
+        pkt = [0x02, cls.CMD_SET_COLOUR, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         pkt[2] = block & 0xff
         pkt[3:6] = [(zone&0xff0000) >> 16, (zone&0xff00) >> 8, zone & 0xff]
         pkt[6:8] = cls._pack_colour(colour)
@@ -312,7 +312,7 @@ class NewAlienFXCmdPacket(object):
         """ Return a command packet for the "loop block end" command with the
         given parameters.
         """
-        pkt = [0x02, cls.CMD_LOOP_BLOCK_END, 0, 0, 0, 0, 0, 0, 0]
+        pkt = [0x02, cls.CMD_LOOP_BLOCK_END, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         return pkt
         
     @classmethod
@@ -320,7 +320,7 @@ class NewAlienFXCmdPacket(object):
         """ Return a command packet for the "transmit execute" command with the
         given parameters.
         """
-        pkt = [0x02, cls.CMD_TRANSMIT_EXECUTE, 0, 0, 0, 0, 0, 0, 0]
+        pkt = [0x02, cls.CMD_TRANSMIT_EXECUTE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         return pkt
         
     @classmethod
@@ -328,7 +328,7 @@ class NewAlienFXCmdPacket(object):
         """ Return a command packet for the "get status" command with the
         given parameters.
         """
-        pkt = [0x02, cls.CMD_GET_STATUS, 0, 0, 0, 0, 0, 0, 0]
+        pkt = [0x02, cls.CMD_GET_STATUS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         return pkt
         
     @classmethod
@@ -336,7 +336,7 @@ class NewAlienFXCmdPacket(object):
         """ Return a command packet for the "reset" command with the
         given parameters.
         """
-        pkt = [0x02, cls.CMD_RESET, 0, 0, 0, 0, 0, 0, 0]
+        pkt = [0x02, cls.CMD_RESET, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         pkt[2] = reset_type & 0xff
         return pkt
         
@@ -345,7 +345,7 @@ class NewAlienFXCmdPacket(object):
         """ Return a command packet for the "save next" command with the
         given parameters.
         """
-        pkt = [0x02, cls.CMD_SAVE_NEXT, 0, 0, 0, 0, 0, 0, 0]
+        pkt = [0x02, cls.CMD_SAVE_NEXT, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         pkt[2] = state & 0xff
         return pkt
         
@@ -354,7 +354,7 @@ class NewAlienFXCmdPacket(object):
         """ Return a command packet for the "save" command with the
         given parameters.
         """
-        pkt = [0x02, cls.CMD_SAVE, 0, 0, 0, 0, 0, 0, 0]
+        pkt = [0x02, cls.CMD_SAVE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         return pkt
         
     @classmethod
@@ -362,6 +362,6 @@ class NewAlienFXCmdPacket(object):
         """ Return a command packet for the "set speed" command with the
         given parameters.
         """
-        pkt = [0x02, cls.CMD_SET_SPEED, 0, 0, 0, 0, 0, 0, 0]
+        pkt = [0x02, cls.CMD_SET_SPEED, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         pkt[2:4] = [(speed&0xff00) >> 8, speed & 0xff]
         return pkt
